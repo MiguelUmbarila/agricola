@@ -16,13 +16,7 @@ class Registro(models.Model):
     def __str__(self):
         return f"{self.NombreUsuario} ({self.rol})"
 
-class Agricultor(models.Model):
-    contraseña = models.CharField(max_length=20, unique=True)
-    nombreUsuario = models.ForeignKey(Registro, on_delete=models.CASCADE)
-    def __str__(self):
-        return f"{self.nombreUsuario}"
-
-class Administrador(models.Model):
+class InicioSecion(models.Model):
     contraseña = models.CharField(max_length=20, unique=True)
     nombreUsuario = models.ForeignKey(Registro, on_delete=models.CASCADE)
     def __str__(self):

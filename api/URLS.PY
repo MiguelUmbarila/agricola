@@ -1,10 +1,9 @@
 from rest_framework import routers
-from .api import RegistroViewSet, AdminViewSet, AgricultorViewSet
+from .view import RegistroViewSet, iniciaSecioViewSet
 
 router = routers.DefaultRouter()
 
 router.register('registro', RegistroViewSet)
-router.register('agricultor', AdminViewSet)
-router.register('administrador', AgricultorViewSet)
+router.register('inicio-secion', iniciaSecioViewSet)
 
 urlpatterns = router.urls
