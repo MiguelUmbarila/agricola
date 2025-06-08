@@ -1,61 +1,51 @@
-from rest_framework import serializers
-from .models import Registro, InicioSecion, adminventario, admingestion, CantidadProducto, GestioFechasAdmin, reportesadministrador, semillaTipo, tipoCosecha
-
-class UsuarioSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Registro
-        fields = [
-            'id',
-            'Nombre',
-            'Apellido',
-            'NombreUsuario',
-            'contraseña',
-            'rol'
-        ]
-
-class inicioSecionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = InicioSecion
-        fields = '__all__'
 
 
-class adminInventarioSerializer(serializers.ModelSerializer):
-    class Meta: 
-        model = adminventario
-        fields = '__all__'
+# from rest_framework import serializers
+# from .models import Registro, InicioSecion, admInventario, adminGestio, adminPerdidas, invetarioCosecha, reportesadministrador, semillaTipo
 
+# class UsuarioSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Registro
+#         fields = [
+#             'id',
+#             'Nombre',
+#             'Apellido',
+#             'NombreUsuario',
+#             'contraseña',
+#             'rol'
+#         ]
 
-class adminGestionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = admingestion
-        fields = '__all__'
+# class InisioSesionSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = InicioSecion
+#         fields = '__all__'
 
+# class AdminInventarioSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = admInventario
+#         fields = '__all__'
 
-class cantidadProductoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CantidadProducto
-        fields = '__all__'
+# class AdminGestionSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = adminGestio
+#         fields = '__all__'
 
+# class AdminPerdidasSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = adminPerdidas
+#         fields = '__all__'
 
-class gestionFechasAdminSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = GestioFechasAdmin
-        fields = '__all__'
+# class InventarioCosechaSerializar(serializers.ModelSerializer):
+#     class Meta:
+#         model = invetarioCosecha
+#         fields = '__all__'
 
+# class ReportesAdminSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = reportesadministrador
+#         fields = '__all__'
 
-class reportesAdminSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = reportesadministrador
-        fields = '__all__'
-
-
-class SemillaTipoSeralizer(serializers.ModelSerializer):
-    class Meta:
-        model = semillaTipo
-        fields = '__all__'
-
-
-class tipoCosechaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = tipoCosecha
-        fields = '__all__'
+# class SemillaTipoSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = semillaTipo
+#         fields = '__all__'

@@ -2,35 +2,41 @@ from django.db import models
 
 # Create your models here.
 
-
+# Registro
 class Registro(models.Model):
-    Nombre = models.CharField(max_length=50)
-    Apellido = models.CharField(max_length=50)
+    Nombres = models.CharField(max_length=50)
+    Apellidos = models.CharField(max_length=50)
+    TIPO_DOCUMENTO = [
+        ('Tarjeta de Identidad','T.I'),
+        ('Cedula de Ciudadania','C.C')
+    ]
+    numeroDocumento = models.CharField(max_length=10)
+    contraseña = models.CharField(max_length=15, unique=True)
+    def __str__(self):
+        return f"{self.contraseña}"
+
+
+
+# Inicio de sesion
+class InicioSecion(models.Model):
     ROLE_CHOICES = [
         ('Agricultor', 'Agricultor'),
         ('Administrador', 'Administrador')
     ]
-    NombreUsuario = models.CharField(max_length=100)
-    contraseña = models.CharField(max_length=15, unique=True)
     rol = models.CharField(max_length=20, choices=ROLE_CHOICES, default='Seleccione su rol')
+    contraseña = models.ForeignKey(Registro, max_length=15, on_delete=models.CASCADE)
     def __str__(self):
-        return f"{self.NombreUsuario} ({self.rol})"
-
-class InicioSecion(models.Model):
-    contraseña = models.CharField(max_length=20, unique=True)
-    nombreUsuario = models.ForeignKey(Registro, on_delete=models.CASCADE)
-    def __str__(self):
-        return f"{self.nombreUsuario}"
+        return f"{self.rol}"
 
 
-class admingestion(models.Model):
-    fechas = models.DateField()
+
+# Gestion del administrador (CRUD)
+class adminGestio(models.Model):
+    fechas = models.DateTimeField()
     Cantidad_Productos = models.CharField(max_length=10)
     TIPO_COSECHA = [
-        ('Papa', 'Papa'),
-        ('Aguacate', 'Aguacate'),
-        ('Cafe', 'Cafe'),
-        ('Sandia', 'Sandia'),
+        ('Cosecha Manual', 'Cosecha Manual'),
+        ('Cosecha Mecanica', 'Cosecha Mecanica'),
     ]
     tipo_Cosecha = models.CharField(max_length=100, choices=TIPO_COSECHA)
 
@@ -38,62 +44,39 @@ class admingestion(models.Model):
         return f"{self.fechas}, {self.Cantidad_Productos}"
 
 
-class CantidadProducto(models.Model):
-    Tipo_Producto = [
-        ('Tractores','Tractores'),
-        ('Insectisida','Insectisida'),
-        ('Semillas','Semillas'),
-        ('Maquinaria','Maquinaria'),
-    ]
 
-    producto = models.CharField(max_length=100, choices=Tipo_Producto)
-    cantidadesproducto = models.CharField(max_length=100)
-    # cosecha = models.ForeignKey(admingestion, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"{self.producto}"
-
-
-class GestioFechasAdmin(models.Model):
-    Temporada = [
-        ('Temporada 1','Temporada 1'),
-        ('Temporada 2','Temporada 2'),
-        ('Temporada 3','Temporada 3'),
-        ('Temporada 4','Temporada 4'),
-    ]
-
-    temporadas = models.CharField(max_length=100, choices=Temporada)
-    fecha = models.DateField()
-
-    def __str__(self):
-        return f"{self.temporadas}, {self.fecha}"
-
-
-class adminventario(models.Model):
+# Inventario de Administrador
+class admInventario(models.Model):
     Tipo_SEMILLA = [
         ('Alverja', 'Alverja'),
         ('Frijoles', 'Frijoles'),
         ('Cafe', 'Cafe'),
         ('Sandia', 'Sandia'),
         ('Papa', 'Papa'),
-        ('Aguacate', 'Aguacate')
+        ('Aguacate', 'Aguacate'),
+        ('Tomate', 'Tomate'),
+        ('Mora', 'Mora'),
+        ('Papaya', 'Papaya'),
+        ('Uvas', 'Uvas'),
     ]
-
+    CESECHA_REGISTRO = [
+        ('Finalizada','Finalizada'),
+        ('En proceso', 'En porceso')
+    ]
     Semillas = models.CharField(max_length=10, choices=Tipo_SEMILLA)
-    CosechasRegistradas = models.CharField(max_length=10)
-    PerdidasRegistradas = models.CharField(max_length=10)
+    CosechasRegistradas = models.CharField(max_length=100, choices=CESECHA_REGISTRO)
+    PerdidaCosechas = models.CharField(max_length=1000)
 
     def __str__(self):
-        return f"{self.Semillas}"
-    
-class tipoCosecha(models.Model):
-    TIPO_COSECHA = [
-        ('Papa', 'Papa'),
-        ('Aguacate', 'Aguacate'),
-        ('Cafe', 'Cafe'),
-        ('Sandia', 'Sandia'),
-    ]
-    tipo_cosecha = models.CharField(max_length=100, choices=TIPO_COSECHA)
+        return f"{self.Tipo_SEMILLA}"
+    def __str__(self):
+        return f"{self.CESECHA_REGISTRO}"
+
+
+
+# Inventario de Cosecha
+class iynvetarioCosecha(models.Model):
+    tipo_cosecha = models.ForeignKey(admInventario, on_delete=models.CASCADE)
     TEMPORADAS = [
         ('Temporada 1','Temporada 1'),
         ('Temporada 2','Temporada 2'),
@@ -106,24 +89,50 @@ class tipoCosecha(models.Model):
         return f"{self.tipo_cosecha}, {self.temporada}"
     
 
-class reportesadministrador(models.Model):
-    Activos_Registrados = models.BigIntegerField()
-    Pasivos_Registrados = models.BigIntegerField()
-    Gnanacias_Registradas = models.BigIntegerField()
 
-    def __str__(self):
-        return f"{self.Gnanacias_Registradas}"
-    
 
+# Inventario de Semilla
 class semillaTipo(models.Model):
-    Tipo_SEMILLA = [
-        ('Alverja', 'Alverja'),
-        ('Frijoles', 'Frijoles'),
-        ('Cafe', 'Cafe'),
-        ('Sandia', 'Sandia')
-    ]
-    tipo_semilla = models.CharField(max_length=100, choices=Tipo_SEMILLA)
+    tipo_semilla = models.ForeignKey(admInventario, on_delete=models.CASCADE)
     cantidad = models.CharField(max_length=1000)
 
     def __str__(self):
         return f"{self.tipo_semilla}"
+    
+
+
+
+class adminPerdidas(models.Model):
+    TEMPORADAS = [
+        ('Temporada 1','Temporada 1'),
+        ('Temporada 2','Temporada 2'),
+        ('Temporada 3','Temporada 3'),
+        ('Temporada 4','Temporada 4'),
+    ]
+    tempo = models.CharField(max_length=100, choices=TEMPORADAS)
+    cantidadPerdidas = models.CharField(max_length=10000)
+
+
+
+
+# Reporte de administrador
+class reportesadministrador(models.Model):
+    tipo_Reporte = [
+        ('Activos', 'Activo'),
+        ('Pasivos', 'Pasivo'),
+        ('Ganancias', 'Ganancia'),
+    ]
+    TEMPORADAS = [
+        ('Temporada 1','Temporada 1'),
+        ('Temporada 2','Temporada 2'),
+        ('Temporada 3','Temporada 3'),
+        ('Temporada 4','Temporada 4'),
+    ]
+    reporte = models.CharField(max_length=100,choices=tipo_Reporte)
+    temporada = models. CharField(max_length=100, choices=TEMPORADAS)
+    cantidadReporte = models.CharField(max_length=100000000)
+
+
+    def __str__(self):
+        return f"{self.reporte}"
+    
