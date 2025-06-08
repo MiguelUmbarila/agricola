@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
@@ -10,6 +11,7 @@ class Registro(models.Model):
         ('Tarjeta de Identidad','T.I'),
         ('Cedula de Ciudadania','C.C')
     ]
+    tipoDocumento = models.CharField(max_length=100, choices=TIPO_DOCUMENTO)
     numeroDocumento = models.CharField(max_length=10)
     contraseña = models.CharField(max_length=15, unique=True)
     def __str__(self):
@@ -32,7 +34,7 @@ class InicioSecion(models.Model):
 
 # Gestion del administrador (CRUD)
 class adminGestio(models.Model):
-    fechas = models.DateTimeField()
+    fechas = models.DateTimeField(default=timezone.now)
     Cantidad_Productos = models.CharField(max_length=10)
     TIPO_COSECHA = [
         ('Cosecha Manual', 'Cosecha Manual'),
@@ -75,7 +77,7 @@ class admInventario(models.Model):
 
 
 # Inventario de Cosecha
-class iynvetarioCosecha(models.Model):
+class invetarioCosecha(models.Model):
     tipo_cosecha = models.ForeignKey(admInventario, on_delete=models.CASCADE)
     TEMPORADAS = [
         ('Temporada 1','Temporada 1'),
