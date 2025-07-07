@@ -38,6 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api',
+    'Agro_Drones',
+    'Riego_Automatizado',
+    'Agro_Control',
+    'Humedad_Suelo',
+    'Estadisticas_Lotes',
+    'Info_Cosecha',
+    'Tipo_Humedad',
     'rest_framework',
     'rest_framework.authtoken'
 ]

@@ -19,6 +19,12 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('registro/', include('api.urls'))
-
+    path('Agricola/', include('api.urls')),
+    path('Agro-Control/', include('Agro_Control.urls')),
+    path('Agro-Drones/', include('Agro_Drones.urls')),
+    path('Estadistica-Lotes/', include('Estadisticas_Lotes.urls')),
+    path('Humedad-Suelo/', include('Humedad_Suelo.urls')),
+    path('Informacion-Cosecha/', include('Info_Cosecha.urls')),
+    path('Riego-Automatizado/', include('Riego_Automatizado.urls')),
+    path('Tipo-Humedad', include('Tipo_Humedad.urls')),
 ]

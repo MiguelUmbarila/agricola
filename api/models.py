@@ -23,7 +23,8 @@ class Registro(models.Model):
 class InicioSecion(models.Model):
     ROLE_CHOICES = [
         ('Agricultor', 'Agricultor'),
-        ('Administrador', 'Administrador')
+        ('Administrador', 'Administrador'),
+        ('operador', 'Operador'),
     ]
     rol = models.CharField(max_length=20, choices=ROLE_CHOICES, default='Seleccione su rol')
     contraseña = models.ForeignKey(Registro, max_length=15, on_delete=models.CASCADE)
