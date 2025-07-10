@@ -1,20 +1,8 @@
 from rest_framework import serializers
 from .models import (
-    CientificoDeDatos, Agricultor,
     Cultivo, DatoClimatico, ModeloPredictivo,
     Alerta, Recomendacion
 )
-# Serializer para CientificoDeDatos
-class CientificoDeDatosSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CientificoDeDatos
-        fields = '__all__'
-
-# Serializer para Agricultor
-class AgricultorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Agricultor
-        fields = '__all__'
 
 # Serializer para Cultivo
 class CultivoSerializer(serializers.ModelSerializer):

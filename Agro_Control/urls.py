@@ -1,7 +1,5 @@
 from django.urls import path
 from .views import (
-    CientificoDeDatosListCreateView, CientificoDeDatosDetailView,
-    AgricultorListCreateView, AgricultorDetailView,
     CultivoListCreateView, CultivoDetailView,
     DatoClimaticoListCreateView, DatoClimaticoDetailView,
     ModeloPredictivoListCreateView, ModeloPredictivoDetailView,
@@ -10,13 +8,7 @@ from .views import (
 )
 
 urlpatterns = [
-    # CientificoDeDatos
-    path('cientificos/', CientificoDeDatosListCreateView.as_view()),
-    path('cientificos/<int:pk>/', CientificoDeDatosDetailView.as_view()),
 
-    # Agricultor
-    path('agricultores/', AgricultorListCreateView.as_view()),
-    path('agricultores/<int:pk>/', AgricultorDetailView.as_view()),
 
     # Cultivo
     path('cultivos/', CultivoListCreateView.as_view()),

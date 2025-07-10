@@ -1,22 +1,5 @@
 from django.db import models
 
-class CientificoDeDatos(models.Model):  # crear tabla del cientifico de datos
-    nombre = models.CharField(max_length=100)
-    rol = models.CharField(max_length=50)
-    correo = models.EmailField(unique=True)
-
-    def __str__(self):
-        return str(self.nombre)
-
-
-class Agricultor(models.Model):  # crear tabla del agricultor
-    nombre = models.CharField(max_length=100)
-    rol = models.CharField(max_length=50)
-    correo = models.EmailField(unique=True)
-
-    def __str__(self):
-        return str(self.nombre)
-
 
 class Cultivo(models.Model):  # crear tabla del cultivo
     tipo = models.CharField(max_length=100)

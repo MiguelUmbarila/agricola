@@ -72,8 +72,7 @@ class admInventario(models.Model):
 
     def __str__(self):
         return f"{self.Tipo_SEMILLA}"
-    def __str__(self):
-        return f"{self.CESECHA_REGISTRO}"
+    
 
 
 
@@ -96,11 +95,23 @@ class invetarioCosecha(models.Model):
 
 # Inventario de Semilla
 class semillaTipo(models.Model):
-    tipo_semilla = models.ForeignKey(admInventario, on_delete=models.CASCADE)
+    Tipo_SEMILLA = [
+        ('Alverja', 'Alverja'),
+        ('Frijoles', 'Frijoles'),
+        ('Cafe', 'Cafe'),
+        ('Sandia', 'Sandia'),
+        ('Papa', 'Papa'),
+        ('Aguacate', 'Aguacate'),
+        ('Tomate', 'Tomate'),
+        ('Mora', 'Mora'),
+        ('Papaya', 'Papaya'),
+        ('Uvas', 'Uvas'),
+    ]
+    tipo_semilla = models.CharField(choices=Tipo_SEMILLA, max_length=1000)
     cantidad = models.CharField(max_length=1000)
 
     def __str__(self):
-        return f"{self.tipo_semilla}"
+        return f"{self.Tipo_SEMILLA}"
     
 
 

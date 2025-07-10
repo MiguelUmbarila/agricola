@@ -3,33 +3,13 @@ from django.shortcuts import render
 # Create your views here.
 from rest_framework import generics
 from .models import (
-    CientificoDeDatos, Agricultor,
     Cultivo, DatoClimatico, ModeloPredictivo,
     Alerta, Recomendacion
 )
 from .serializers import (
-    CientificoDeDatosSerializer, AgricultorSerializer,
     CultivoSerializer, DatoClimaticoSerializer, ModeloPredictivoSerializer,
     AlertaSerializer, RecomendacionSerializer
 )
-
-# CientificoDeDatos
-class CientificoDeDatosListCreateView(generics.ListCreateAPIView):
-    queryset = CientificoDeDatos.objects.all()
-    serializer_class = CientificoDeDatosSerializer
-
-class CientificoDeDatosDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = CientificoDeDatos.objects.all()
-    serializer_class = CientificoDeDatosSerializer
-
-# Agricultor
-class AgricultorListCreateView(generics.ListCreateAPIView):
-    queryset = Agricultor.objects.all()
-    serializer_class = AgricultorSerializer
-
-class AgricultorDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Agricultor.objects.all()
-    serializer_class = AgricultorSerializer
 
 # Cultivo
 class CultivoListCreateView(generics.ListCreateAPIView):
